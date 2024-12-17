@@ -1,4 +1,4 @@
-package Variable;
+package variable;
 
 public class Constant {
     public static final int MAX_SCREEN_COL = 20;
