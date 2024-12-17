@@ -19,8 +19,15 @@ public class Player extends Entity {
         solidArea.height = 32;
         solidArea.width = 32;
 
+        setDefault();
         getPlayerImage();
         state = 1;
+    }
+
+    public void setDefault() {
+        x = Constant.ORIGINAL_TILE_SIZE * 2;
+        y = Constant.ORIGINAL_TILE_SIZE * 2;
+        speed = 2;
     }
 
 
