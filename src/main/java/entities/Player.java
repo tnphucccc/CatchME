@@ -1,5 +1,7 @@
 package entities;
 
+import variable.Constant;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -45,6 +47,7 @@ public class Player extends Entity {
 
     @Override
     public void draw(Graphics2D g2) {
-
+        BufferedImage img = getEntityImage();
+        g2.drawImage(img, getX(), getY(), Constant.ORIGINAL_TILE_SIZE,Constant.ORIGINAL_TILE_SIZE, null);
     }
 }
