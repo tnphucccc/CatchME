@@ -1,10 +1,10 @@
 package entities;
 
-import variable.Constant;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
+import variables.Constant;
 
 public class Player extends Entity {
 
