@@ -9,7 +9,7 @@ public class Constant {
     public static final int WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 960
     //Player position in main screen
     public static final int HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; // 720
-    public static final String TITLE = "Catch Me If You Can";
+    public static final String TITLE = "Dare you to catch me";
     public static final int FPS = 60;
     //public static final int Tera= 1_000_000_000;
 }
