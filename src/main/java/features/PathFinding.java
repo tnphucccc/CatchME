@@ -27,4 +27,19 @@ public class PathFinding {
         }
     }
 
+    public void resetNodes() {
+        //reset node
+        for (int col = 0; col < Constant.MAX_SCREEN_COL; col++) {
+            for (int row = 0; row < Constant.MAX_SCREEN_ROW; row++) {
+                node[col][row].open = false;
+                node[col][row].checked = false;
+                node[col][row].solid = false;
+            }
+        }
+        openList.clear();
+        pathList.clear();
+        goalReached = false;
+        step = 0;
+    }
+
 }
