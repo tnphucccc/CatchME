@@ -75,7 +75,6 @@ public class PathFinding {
         }
     }
 
-
     public void openNode(Node node) {
         if (!node.open && !node.checked && !node.solid) {
             node.open = true;
@@ -90,5 +89,58 @@ public class PathFinding {
             pathList.add(0, current);
             current = current.parent;
         }
+    }
+
+    public boolean search() {
+        while (!goalReached && step < 500) {
+            int col = currentNode.col;
+            int row = currentNode.row;
+
+            // check the current node
+            currentNode.checked = true;
+            openList.remove(currentNode);
+
+            //Open the Up node
+            if (row - 1 >= 0) {
+                openNode(node[col][row - 1]);
+            }
+            //Open the Left node
+            if (col - 1 >= 0) {
+                openNode(node[col - 1][row]);
+            }
+            //Open the Down node
+            if (row + 1 < Constant.MAX_SCREEN_ROW) {
+                openNode(node[col][row + 1]);
+            }
+            //Open the Right node
+            if (col + 1 < Constant.MAX_SCREEN_COL) {
+                openNode(node[col + 1][row]);
+            }
+
+            //Find the best node
+            int bestNodeIndex = 0;
+            int bestNodeFCost = 999;
+
+            for (int i = 0; i < openList.size(); i++) {
+                if (openList.get(i).fCost < bestNodeFCost) {
+                    bestNodeIndex = i;
+                    bestNodeFCost = openList.get(i).fCost;
+                } else if (openList.get(i).fCost == bestNodeFCost) {
+                    if (openList.get(i).gCost < openList.get(bestNodeIndex).gCost) {
+                        bestNodeIndex = i;
+                    }
+                }
+            }
+            if (openList.size() == 0) {
+                break;
+            }
+            currentNode = openList.get(bestNodeIndex);
+            if (currentNode == goalNode) {
+                goalReached = true;
+                trackPath();
+            }
+            step++;
+        }
+        return goalReached;
     }
 }
