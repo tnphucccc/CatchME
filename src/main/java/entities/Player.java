@@ -4,9 +4,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import config.Game;
+import core.KeyHandler;
 import variables.Constant;
 
 public class Player extends Entity {
+
 
     public Player() {
         this.name = "player";
@@ -25,8 +28,8 @@ public class Player extends Entity {
     }
 
     public void setDefault() {
-        x = Constant.ORIGINAL_TILE_SIZE * 2;
-        y = Constant.ORIGINAL_TILE_SIZE * 2;
+        x = Constant.TILE_SIZE * 2;
+        y = Constant.TILE_SIZE * 2;
         speed = 2;
     }
 
@@ -52,9 +55,24 @@ public class Player extends Entity {
 
     }
 
+    public void teleport(int index) {
+
+        if (index != -1 && !Game.PortInList[index].cd) {
+            //choose a random port
+            int portIndex = (int) Math.floor(Math.random() * 10);
+            while (Game.PortList[portIndex] == null) {
+                portIndex = (int) Math.floor(Math.random() * 10);
+            }
+            //teleport
+            this.x = Game.PortList[portIndex].objectX;
+            this.y = Game.PortList[portIndex].objectY;
+            Game.PortInList[index].setCD(true);
+        }
+    }
+
     @Override
     public void draw(Graphics2D g2) {
         BufferedImage img = getEntityImage();
-        g2.drawImage(img, getX(), getY(), Constant.ORIGINAL_TILE_SIZE,Constant.ORIGINAL_TILE_SIZE, null);
+        g2.drawImage(img, getX(), getY(), Constant.TILE_SIZE,Constant.TILE_SIZE, null);
     }
 }
