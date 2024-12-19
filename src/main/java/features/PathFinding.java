@@ -76,4 +76,19 @@ public class PathFinding {
     }
 
 
+    public void openNode(Node node) {
+        if (!node.open && !node.checked && !node.solid) {
+            node.open = true;
+            node.parent = currentNode;
+            openList.add(node);
+        }
+    }
+
+    public void trackPath() {
+        Node current = goalNode;
+        while (current != startNode) {
+            pathList.add(0, current);
+            current = current.parent;
+        }
+    }
 }
