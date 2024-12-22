@@ -5,11 +5,15 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import config.Game;
+import core.Collision;
 import core.KeyHandler;
 import variables.Constant;
+import config.Window;
 
 public class Player extends Entity {
 
+    public Collision collisionCheck = new Collision();
+    KeyHandler keyH = Window.getKeyH();
 
     public Player() {
         this.name = "player";
@@ -52,7 +56,45 @@ public class Player extends Entity {
 
     @Override
     public void update() {
+        collisionOn = false;
 
+        //Check collision
+        collisionCheck.checkTile(this);
+
+        //Check object collision
+        int interactObject = collisionCheck.checkObject(this, true);
+        teleport(interactObject);
+
+        if ((keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) && state == 1) {
+            if (keyH.upPressed) { //Character Movement
+                direction = 0;
+            } else if (keyH.downPressed) {
+                direction = 2;
+            } else if (keyH.leftPressed) {
+                direction = 3;
+            } else {
+                direction = 1;
+            }
+
+            //Animation
+            if (!collisionOn) {
+                switch (direction) {
+                    case 0 -> y -= speed;
+                    case 2 -> y += speed;
+                    case 3 -> x -= speed;
+                    case 1 -> x += speed;
+                }
+            }
+
+            spriteCounter++;
+            if (spriteCounter > 8) {
+                if (spriteNum != 4) {
+                    spriteNum++;
+                } else
+                    spriteNum = 1;
+                spriteCounter = 0;
+            }
+        }
     }
 
     public void teleport(int index) {
