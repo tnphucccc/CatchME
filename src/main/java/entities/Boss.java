@@ -38,7 +38,7 @@ public class Boss extends Entity {
 
     public void getBossImage() {
         try {
-            getSprite("/Sprite/White.png");
+            getSprite("/Models/White.png");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -48,7 +48,7 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
         try {
-            getSprite("/Sprite/Black.png");
+            getSprite("/Models/Black.png");
         } catch (IOException e) {
             e.printStackTrace();
         }
